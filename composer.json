@@ -1,0 +1,31 @@
+{
+    "name": "selmanozturk/flarum-ext-mobile-search",
+    "description": "Move mobile search to homepage",
+    "type": "flarum-extension",
+    "license": "MIT",
+    "authors": [],
+    "require": {
+        "flarum/core": "^1.8"
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Mobile Search",
+            "icon": {
+                "name": "fas fa-search",
+                "color": "#fff",
+                "backgroundColor": "#684ba6"
+            }
+        },
+        "flarum-cli": {
+            "modules": {
+                "admin": true,
+                "forum": true,
+                "js": true,
+                "css": true,
+                "locale": true,
+                "git-hooks": true,
+                "github-actions": true
+            }
+        }
+    }
+}

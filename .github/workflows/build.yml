@@ -1,0 +1,40 @@
+name: Build JS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.head_ref }}
+          # Value already defaults to true, but `persist-credentials` is required to push new commits to the repository.
+          persist-credentials: true
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: js/package-lock.json
+
+      - name: Install and Build
+        run: |
+          cd js
+          npm ci
+          npm run build
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: "Build JavaScript Assets"
+          file_pattern: 'js/dist/*.js js/package-lock.json'
